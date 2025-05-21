@@ -4,22 +4,23 @@ import { catchAsyncError } from "../../middlewares/catchAsyncError.js";
 import mongoose from "mongoose";
 
 export const addBookReview = catchAsyncError(async (req, res, next) => {
-  const bookId = req.params.id;
-  const userId = req.user._id;
-  const { rating, comment } = req.body;
-
-  // Validate input
-  if (!rating || typeof rating !== "number" || rating < 1 || rating > 5) {
-    return res.status(400).json({
-      success: false,
-      error: {
-        code: "INVALID_RATING",
-        message: "Rating must be a number between 1 and 5",
-      },
-    });
-  }
-
   try {
+    const bookId = req.params.id;
+    const userId = req.user._id;
+    const { rating, comment } = req.body;
+
+    // Validate input
+    if (!rating || typeof rating !== "number" || rating < 1 || rating > 5) {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: "INVALID_RATING",
+          message: "Rating must be a number between 1 and 5",
+        },
+      });
+    }
+
+    // Ensuring bookId is a valid mongodb ObjectId
     if (!mongoose.Types.ObjectId.isValid(bookId)) {
       return res.status(400).json({
         success: false,
@@ -67,9 +68,8 @@ export const addBookReview = catchAsyncError(async (req, res, next) => {
       message: "Review submitted successfully",
       data: review,
     });
-
   } catch (error) {
-    console.error(error);
+    console.error("Error submitting the review:", error);
     return res.status(500).json({
       success: false,
       error: {

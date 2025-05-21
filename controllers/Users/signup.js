@@ -96,6 +96,13 @@ export const signup = catchAsyncError(async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error);
+    console.error("Error signing up the user:", error);
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: "SERVER_ERROR",
+        message: "Something went wrong while signing up the user",
+      },
+    });
   }
 });

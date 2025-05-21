@@ -36,6 +36,7 @@ export const login = catchAsyncError(async (req, res, next) => {
         },
       });
     }
+
     if (password.length < 8 || password.length > 50) {
       return res.status(400).json({
         success: false,
@@ -48,7 +49,6 @@ export const login = catchAsyncError(async (req, res, next) => {
 
     // Ensuring user exists
     const user = await User.findOne({ email }).select("+password");
-
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -82,6 +82,13 @@ export const login = catchAsyncError(async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error);
+    console.error("Error in user login:", error);
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: "SERVER_ERROR",
+        message: "Something went wrong while user login",
+      },
+    });
   }
 });

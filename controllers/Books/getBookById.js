@@ -8,6 +8,7 @@ export const getBookById = catchAsyncError(async (req, res, next) => {
     const { id } = req.params;
     const { page = 1, limit = 5 } = req.query;
 
+    // Ensuring bookId is a valid mongodb ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({
         success: false,
@@ -18,6 +19,7 @@ export const getBookById = catchAsyncError(async (req, res, next) => {
       });
     }
 
+    // Ensuring book exists in the record
     const book = await Book.findById(id);
     if (!book) {
       return res.status(404).json({
@@ -50,6 +52,7 @@ export const getBookById = catchAsyncError(async (req, res, next) => {
       ]),
     ]);
 
+    // Safely sets the average rating
     const averageRating = avgRatingAgg.length
       ? parseFloat(avgRatingAgg[0].averageRating.toFixed(2))
       : null;
@@ -68,6 +71,12 @@ export const getBookById = catchAsyncError(async (req, res, next) => {
     });
   } catch (error) {
     console.error("Error fetching book details:", error);
-    return res.status(500).json({ success: false, message: "Server error" });
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: "SERVER_ERROR",
+        message: "Something went wrong while fetching book details",
+      },
+    });
   }
 });

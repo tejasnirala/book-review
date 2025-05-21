@@ -71,6 +71,13 @@ export const addBook = catchAsyncError(async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(error);
+    console.error("Error adding the book:", error);
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: "SERVER_ERROR",
+        message: "Something went wrong while adding the book",
+      },
+    });
   }
 });

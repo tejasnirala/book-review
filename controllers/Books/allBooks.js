@@ -5,21 +5,22 @@ export const allBooks = catchAsyncError(async (req, res, next) => {
   try {
     const { page = 1, limit = 10, author, genre } = req.query;
 
+    // Set filters to apply
     const filters = {};
-
     if (author) {
-      filters.author = { $regex: author, $options: "i" }; // case-insensitive partial match
+      // case-insensitive partial match
+      filters.author = { $regex: author, $options: "i" };
     }
-
     if (genre) {
-      filters.genre = genre; // exact match (controlled via enum)
+      filters.genre = genre;
     }
 
     const skip = (parseInt(page) - 1) * parseInt(limit);
 
+    // Get books and total number of books
     const [books, total] = await Promise.all([
       Book.find(filters)
-        .sort({ createdAt: -1 }) // newest first
+        .sort({ createdAt: -1 })
         .skip(skip)
         .limit(parseInt(limit)),
       Book.countDocuments(filters),
@@ -34,6 +35,13 @@ export const allBooks = catchAsyncError(async (req, res, next) => {
       data: books,
     });
   } catch (error) {
-    next();
+    console.error("Error fetching books:", error);
+    return res.status(500).json({
+      success: false,
+      error: {
+        code: "SERVER_ERROR",
+        message: "Something went wrong while fetching books",
+      },
+    });
   }
 });
