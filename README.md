@@ -113,7 +113,9 @@ Your backend server will start spining on `http://localhost:3000`
 
 ## 📦 Example API Requests
 
-### 🔐 Signup (curl)
+### 🔐 Signup
+
+#### **cURL :**
 
 ```bash
 curl --location 'http://localhost:3000/signup' \
@@ -125,7 +127,7 @@ curl --location 'http://localhost:3000/signup' \
   }'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -137,7 +139,9 @@ curl --location 'http://localhost:3000/signup' \
 }
 ```
 
-### 🔐 Login (curl)
+### 🔐 Login
+
+#### **cURL :**
 
 ```bash
 curl --location 'http://localhost:3000/login' \
@@ -148,7 +152,7 @@ curl --location 'http://localhost:3000/login' \
   }'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -160,7 +164,9 @@ curl --location 'http://localhost:3000/login' \
 }
 ```
 
-### 📚 Add A New Book (curl)
+### 📚 Add A New Book
+
+#### **cURL :**
 
 ```bash
 curl --location 'http://localhost:3000/books' \
@@ -174,7 +180,7 @@ curl --location 'http://localhost:3000/books' \
   }'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -195,79 +201,53 @@ curl --location 'http://localhost:3000/books' \
 }
 ```
 
-### 📚 Get All Books (curl)
+### 📚 Get All Books
+
+#### **cURL :**
 
 > with Pagination and optional filters by `author` and `genre`
 
 ```bash
-curl --location 'http://localhost:3000/books?author=j.k.&genre=Fantasy&page=1&limit=5'
+curl --location 'http://localhost:3000/books?author=j.k.&genre=Fantasy&page=1&limit=2'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
-  "success": true,
-  "total": 7,
-  "page": 1,
-  "pageSize": 5,
-  "totalPages": 2,
-  "data": [
-    {
-      "_id": "682db51b2cc0f8000a06e488",
-      "title": "Harry Potter and the Prisoner of Azkaban",
-      "author": "J.K. Rowling",
-      "genre": "Fantasy",
-      "publishedYear": 1999,
-      "__v": 0,
-      "createdAt": "2025-05-21T11:12:27.790Z",
-      "updatedAt": "2025-05-21T11:12:27.790Z"
-    },
-    {
-      "_id": "682db51b2cc0f8000a06e48a",
-      "title": "Harry Potter and the Order of the Phoenix",
-      "author": "J.K. Rowling",
-      "genre": "Fantasy",
-      "publishedYear": 2003,
-      "__v": 0,
-      "createdAt": "2025-05-21T11:12:27.790Z",
-      "updatedAt": "2025-05-21T11:12:27.790Z"
-    },
-    {
-      "_id": "682db51b2cc0f8000a06e486",
-      "title": "Harry Potter and the Philosopher's Stone",
-      "author": "J.K. Rowling",
-      "genre": "Fantasy",
-      "publishedYear": 1997,
-      "__v": 0,
-      "createdAt": "2025-05-21T11:12:27.790Z",
-      "updatedAt": "2025-05-21T11:12:27.790Z"
-    },
-    {
-      "_id": "682db51b2cc0f8000a06e487",
-      "title": "Harry Potter and the Chamber of Secrets",
-      "author": "J.K. Rowling",
-      "genre": "Fantasy",
-      "publishedYear": 1998,
-      "__v": 0,
-      "createdAt": "2025-05-21T11:12:27.790Z",
-      "updatedAt": "2025-05-21T11:12:27.790Z"
-    },
-    {
-      "_id": "682db51b2cc0f8000a06e489",
-      "title": "Harry Potter and the Goblet of Fire",
-      "author": "J.K. Rowling",
-      "genre": "Fantasy",
-      "publishedYear": 2000,
-      "__v": 0,
-      "createdAt": "2025-05-21T11:12:27.790Z",
-      "updatedAt": "2025-05-21T11:12:27.790Z"
-    }
-  ]
+    "success": true,
+    "total": 7,
+    "page": 1,
+    "pageSize": 2,
+    "totalPages": 4,
+    "data": [
+        {
+            "_id": "682db51b2cc0f8000a06e486",
+            "title": "Harry Potter and the Philosopher's Stone",
+            "author": "J.K. Rowling",
+            "genre": "Fantasy",
+            "publishedYear": 1997,
+            "__v": 0,
+            "createdAt": "2025-05-21T11:12:27.790Z",
+            "updatedAt": "2025-05-21T11:12:27.790Z"
+        },
+        {
+            "_id": "682db51b2cc0f8000a06e487",
+            "title": "Harry Potter and the Chamber of Secrets",
+            "author": "J.K. Rowling",
+            "genre": "Fantasy",
+            "publishedYear": 1998,
+            "__v": 0,
+            "createdAt": "2025-05-21T11:12:27.790Z",
+            "updatedAt": "2025-05-21T11:12:27.790Z"
+        }
+    ]
 }
 ```
 
-### 📚 Get Book Details by ID (curl)
+### 📚 Get Book Details by ID
+
+#### **cURL :**
 
 > including: **Average rating** and **Reviews** (with pagination)
 
@@ -275,7 +255,7 @@ curl --location 'http://localhost:3000/books?author=j.k.&genre=Fantasy&page=1&li
 curl --location 'http://localhost:3000/books/682dc49e4a414523028d286d'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -316,7 +296,9 @@ curl --location 'http://localhost:3000/books/682dc49e4a414523028d286d'
 }
 ```
 
-### 📚 Submit A Review (curl)
+### 📚 Submit A Review
+
+#### **cURL :**
 
 > Authenticated users only, one review per user per book
 
@@ -330,7 +312,7 @@ curl --location 'http://localhost:3000/books/682dc49e4a414523028d286d/reviews' \
   }'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -349,7 +331,9 @@ curl --location 'http://localhost:3000/books/682dc49e4a414523028d286d/reviews' \
 }
 ```
 
-### 📚 Update Your Own Review (curl)
+### 📚 Update Your Own Review
+
+#### **cURL :**
 
 ```bash
 curl --location --request PUT 'http://localhost:3000/reviews/682dc8de4a414523028d2878' \
@@ -361,7 +345,7 @@ curl --location --request PUT 'http://localhost:3000/reviews/682dc8de4a414523028
   }'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -380,7 +364,9 @@ curl --location --request PUT 'http://localhost:3000/reviews/682dc8de4a414523028
 }
 ```
 
-### 📚 Delete Your Own Review (curl)
+### 📚 Delete Your Own Review
+
+#### **cURL :**
 
 ```bash
 curl --location --request DELETE 'http://localhost:3000/reviews/682dc8de4a414523028d2878' \
@@ -392,7 +378,7 @@ curl --location --request DELETE 'http://localhost:3000/reviews/682dc8de4a414523
   }'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -402,13 +388,15 @@ curl --location --request DELETE 'http://localhost:3000/reviews/682dc8de4a414523
 }
 ```
 
-### 📚 Search Books by `title` or `author` (curl)
+### 🔍 Search Books by `title` or `author`
+
+#### **cURL :**
 
 ```bash
-curl --location 'http://localhost:3000/search?query=hAr&page=1&limit=5'
+curl --location 'http://localhost:3000/search?query=hAr&page=1&limit=2'
 ```
 
-**Response :**
+#### **Response :**
 
 ```json
 {
@@ -416,26 +404,6 @@ curl --location 'http://localhost:3000/search?query=hAr&page=1&limit=5'
   "message": "Found 8 book(s) matching your search",
   "data": {
     "books": [
-      {
-        "_id": "682db51b2cc0f8000a06e487",
-        "title": "Harry Potter and the Chamber of Secrets",
-        "author": "J.K. Rowling",
-        "genre": "Fantasy",
-        "publishedYear": 1998,
-        "__v": 0,
-        "createdAt": "2025-05-21T11:12:27.790Z",
-        "updatedAt": "2025-05-21T11:12:27.790Z"
-      },
-      {
-        "_id": "682db51b2cc0f8000a06e489",
-        "title": "Harry Potter and the Goblet of Fire",
-        "author": "J.K. Rowling",
-        "genre": "Fantasy",
-        "publishedYear": 2000,
-        "__v": 0,
-        "createdAt": "2025-05-21T11:12:27.790Z",
-        "updatedAt": "2025-05-21T11:12:27.790Z"
-      },
       {
         "_id": "682db51b2cc0f8000a06e482",
         "title": "Sapiens: A Brief History of Humankind",
@@ -455,24 +423,84 @@ curl --location 'http://localhost:3000/search?query=hAr&page=1&limit=5'
         "__v": 0,
         "createdAt": "2025-05-21T11:12:27.790Z",
         "updatedAt": "2025-05-21T11:12:27.790Z"
-      },
-      {
-        "_id": "682db51b2cc0f8000a06e488",
-        "title": "Harry Potter and the Prisoner of Azkaban",
-        "author": "J.K. Rowling",
-        "genre": "Fantasy",
-        "publishedYear": 1999,
-        "__v": 0,
-        "createdAt": "2025-05-21T11:12:27.790Z",
-        "updatedAt": "2025-05-21T11:12:27.790Z"
       }
     ],
     "total": 8,
     "currentPage": 1,
-    "totalPages": 2
+    "totalPages": 4
   }
 }
 ```
+
+---
+
+## 🗂️ Database Schema
+
+This project uses **MongoDB** with **Mongoose ODM**, and the schema is normalized to allow flexibility and efficient querying.
+
+<img src="./dbSchema.png" alt="DB Schema">
+
+---
+
+### 👤 User Schema
+
+| Field       | Type     | Description         |
+| ----------- | -------- | ------------------- |
+| `_id`       | ObjectId | Auto-generated ID   |
+| `name`      | String   | User's full name    |
+| `email`     | String   | Unique, required    |
+| `password`  | String   | Hashed using bcrypt |
+| `createdAt` | Date     | Timestamp           |
+| `updatedAt` | Date     | Timestamp           |
+
+**Constraints**:
+
+- `email` must be unique
+- Password is encrypted before saving
+
+---
+
+### 📖 Book Schema
+
+| Field           | Type         | Description                    |
+| --------------- | ------------ | ------------------------------ |
+| `_id`           | ObjectId     | Auto-generated ID              |
+| `title`         | String       | Book title                     |
+| `author`        | String       | Author name                    |
+| `genre`         | Enum[String] | Genre (e.g., Fiction, History) |
+| `publishedYear` | Number       | Year the book was published    |
+| `createdAt`     | Date         | Timestamp                      |
+| `updatedAt`     | Date         | Timestamp                      |
+
+---
+
+### ✍️ Review Schema
+
+| Field       | Type     | Description              |
+| ----------- | -------- | ------------------------ |
+| `_id`       | ObjectId | Auto-generated ID        |
+| `book`      | ObjectId | Reference to `Book`      |
+| `user`      | ObjectId | Reference to `User`      |
+| `rating`    | Number   | 1–5 scale                |
+| `comment`   | String   | User-written review text |
+| `createdAt` | Date     | Timestamp                |
+| `updatedAt` | Date     | Timestamp                |
+
+**Constraints**:
+
+- A user can submit **only one review per book**
+- Reviews are **linked both ways**: via `book` and `user`
+
+---
+
+### 🔗 Entity Relationships
+
+- **User–Book**: One user can create many books
+- **User–Review**: One user can write multiple reviews (only one review per book)
+- **Book–Review**: One book can have many reviews
+- Each **review** is uniquely associated with **one user** and **one book**
+
+
 
 ---
 
@@ -501,32 +529,6 @@ curl --location 'http://localhost:3000/search?query=hAr&page=1&limit=5'
 ### ✅ Basic Validation & Security
 
 - Bcrypt is used to hash passwords.
-
----
-
-## 🧪 Sample Data
-
-### 📖 Book
-
-```json
-{
-  "title": "Atomic Habits",
-  "author": "James Clear",
-  "genre": "Self-help",
-  "publishedYear": 2018
-}
-```
-
-### 📝 Review
-
-```json
-{
-  "rating": 5,
-  "comment": "Life-changing read!",
-  "book": "<bookId>",
-  "user": "<userId>"
-}
-```
 
 ---
 

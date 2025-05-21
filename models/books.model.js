@@ -46,7 +46,7 @@ const bookSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Optional: create an index on title and author for search performance
+// An index on title and author for search performance
 bookSchema.index({ title: 1, author: 1 });
 
 export const Book = mongoose.model("Book", bookSchema);
