@@ -5,3 +5,6 @@ export { addBook } from "./Books/addBook.js";
 export { allBooks } from "./Books/allBooks.js";
 export { getBookById } from "./Books/getBookById.js";
 export { addBookReview } from "./Books/addBookReview.js";
+
+export { updateReview } from "./Reviews/updateReview.js";
+export { deleteReview } from "./Reviews/deleteReview.js";
