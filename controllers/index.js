@@ -8,3 +8,5 @@ export { addBookReview } from "./Books/addBookReview.js";
 
 export { updateReview } from "./Reviews/updateReview.js";
 export { deleteReview } from "./Reviews/deleteReview.js";
+
+export { searchBook } from "./Search/searchBook.js";

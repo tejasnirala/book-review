@@ -45,7 +45,7 @@ export const addBook = catchAsyncError(async (req, res, next) => {
 
     // Ensuring if book is already added
     const existingBook = await Book.find({ title });
-    if (existingBook) {
+    if (existingBook.length) {
       return res.status(409).json({
         success: false,
         error: {

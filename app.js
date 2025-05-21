@@ -12,6 +12,7 @@ import {
   addBookReview,
   updateReview,
   deleteReview,
+  searchBook,
 } from "./controllers/index.js";
 
 connect();
@@ -38,8 +39,6 @@ app.post("/books/:id/reviews", isAuthenticated, addBookReview);
 app.put("/reviews/:id", isAuthenticated, updateReview);
 app.delete("/reviews/:id", isAuthenticated, deleteReview);
 
-app.get("/search", (req, res) => {
-  res.status(200).send("hello g");
-});
+app.get("/search", searchBook);
 
 export default app;
