@@ -35,6 +35,72 @@ It supports **user authentication**, **book CRUD**, **review operations**, **sea
 
 ---
 
+## 🗂️ Database Schema
+
+This project uses **MongoDB** with **Mongoose ODM**, and the schema is normalized to allow flexibility and efficient querying.
+
+---
+
+### 👤 User Schema
+
+| Field       | Type     | Description         |
+| ----------- | -------- | ------------------- |
+| `_id`       | ObjectId | Auto-generated ID   |
+| `name`      | String   | User's full name    |
+| `email`     | String   | Unique, required    |
+| `password`  | String   | Hashed using bcrypt |
+| `createdAt` | Date     | Timestamp           |
+| `updatedAt` | Date     | Timestamp           |
+
+**Constraints**:
+
+- `email` must be unique
+- Password is encrypted before saving
+
+---
+
+### 📖 Book Schema
+
+| Field           | Type         | Description                    |
+| --------------- | ------------ | ------------------------------ |
+| `_id`           | ObjectId     | Auto-generated ID              |
+| `title`         | String       | Book title                     |
+| `author`        | String       | Author name                    |
+| `genre`         | Enum[String] | Genre (e.g., Fiction, History) |
+| `publishedYear` | Number       | Year the book was published    |
+| `createdAt`     | Date         | Timestamp                      |
+| `updatedAt`     | Date         | Timestamp                      |
+
+---
+
+### ✍️ Review Schema
+
+| Field       | Type     | Description              |
+| ----------- | -------- | ------------------------ |
+| `_id`       | ObjectId | Auto-generated ID        |
+| `book`      | ObjectId | Reference to `Book`      |
+| `user`      | ObjectId | Reference to `User`      |
+| `rating`    | Number   | 1–5 scale                |
+| `comment`   | String   | User-written review text |
+| `createdAt` | Date     | Timestamp                |
+| `updatedAt` | Date     | Timestamp                |
+
+**Constraints**:
+
+- A user can submit **only one review per book**
+- Reviews are **linked both ways**: via `book` and `user`
+
+---
+
+### 🔗 Entity Relationships
+
+- **User–Book**: One user can create many books
+- **User–Review**: One user can write multiple reviews (only one review per book)
+- **Book–Review**: One book can have many reviews
+- Each **review** is uniquely associated with **one user** and **one book**
+
+---
+
 ## 🚀 Local Setup
 
 ### 1. Clone the repository
@@ -57,6 +123,8 @@ Copy `.env.example` to `.env` and update values as needed:
 ```bash
 cp .env.example .env
 ```
+
+Edit `.env` file:
 
 ```env
 PORT=3000
@@ -431,76 +499,6 @@ curl --location 'http://localhost:3000/search?query=hAr&page=1&limit=2'
   }
 }
 ```
-
----
-
-## 🗂️ Database Schema
-
-This project uses **MongoDB** with **Mongoose ODM**, and the schema is normalized to allow flexibility and efficient querying.
-
-<img src="./dbSchema.png" alt="DB Schema">
-
----
-
-### 👤 User Schema
-
-| Field       | Type     | Description         |
-| ----------- | -------- | ------------------- |
-| `_id`       | ObjectId | Auto-generated ID   |
-| `name`      | String   | User's full name    |
-| `email`     | String   | Unique, required    |
-| `password`  | String   | Hashed using bcrypt |
-| `createdAt` | Date     | Timestamp           |
-| `updatedAt` | Date     | Timestamp           |
-
-**Constraints**:
-
-- `email` must be unique
-- Password is encrypted before saving
-
----
-
-### 📖 Book Schema
-
-| Field           | Type         | Description                    |
-| --------------- | ------------ | ------------------------------ |
-| `_id`           | ObjectId     | Auto-generated ID              |
-| `title`         | String       | Book title                     |
-| `author`        | String       | Author name                    |
-| `genre`         | Enum[String] | Genre (e.g., Fiction, History) |
-| `publishedYear` | Number       | Year the book was published    |
-| `createdAt`     | Date         | Timestamp                      |
-| `updatedAt`     | Date         | Timestamp                      |
-
----
-
-### ✍️ Review Schema
-
-| Field       | Type     | Description              |
-| ----------- | -------- | ------------------------ |
-| `_id`       | ObjectId | Auto-generated ID        |
-| `book`      | ObjectId | Reference to `Book`      |
-| `user`      | ObjectId | Reference to `User`      |
-| `rating`    | Number   | 1–5 scale                |
-| `comment`   | String   | User-written review text |
-| `createdAt` | Date     | Timestamp                |
-| `updatedAt` | Date     | Timestamp                |
-
-**Constraints**:
-
-- A user can submit **only one review per book**
-- Reviews are **linked both ways**: via `book` and `user`
-
----
-
-### 🔗 Entity Relationships
-
-- **User–Book**: One user can create many books
-- **User–Review**: One user can write multiple reviews (only one review per book)
-- **Book–Review**: One book can have many reviews
-- Each **review** is uniquely associated with **one user** and **one book**
-
-
 
 ---
 
